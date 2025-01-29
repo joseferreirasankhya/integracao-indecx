@@ -1,0 +1,8 @@
+venv
+.env
+db.sqlite3
+src/__pycache__
+src/sensedata/migrations
+src/staticfiles
+src/static
+src/media
