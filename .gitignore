@@ -6,3 +6,5 @@ src/sensedata/migrations
 src/staticfiles
 src/static
 src/media
+sensedata/migrations
+sensedata/__pycache__
