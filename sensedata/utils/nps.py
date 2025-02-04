@@ -36,7 +36,6 @@ class NPSData:
             "nps": [
                 {
                     "id_legacy": self.form_id_legacy,
-
                     "customer": {
                         "id": '',
                         "id_legacy": self.client_id_legacy

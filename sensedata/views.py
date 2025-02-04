@@ -5,8 +5,6 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-# - Sensedata
-from sensedata.utils.nps import NPSData
 # - JSON
 import json
 # - Services
@@ -33,7 +31,7 @@ def debug_nps(request):
     # If request data is provided
     if request.data:
         # Transform request data to Sense NPS API JSON format
-        data = nps_service.transform_nps_data(request.data)
+        data = nps_service.transform_nps_data(request.data['answer'])
         # If data is provided
         if data:
             # Return response with data
@@ -44,4 +42,3 @@ def debug_nps(request):
     else:
         # Return response with error message
         return Response({'message': 'No data provided'}, status=status.HTTP_400_BAD_REQUEST)
-
