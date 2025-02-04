@@ -15,7 +15,9 @@ class NPSData:
     Stores information about an NPS survey response including identification,
     dates, respondent details, and survey results.
     """
-    id_legacy: str
+    # NPS data properties
+    form_id_legacy: str
+    client_id_legacy: str
     ref_date: date
     survey_date: date
     medium: str
@@ -23,7 +25,36 @@ class NPSData:
     score: int
     comments: Optional[str]
     tags: Optional[list[str]]
-    role: str
-    stage: str
-    category: str
-    form_id: str
+    group: str
+
+    def to_sense_api_json(self):
+        '''
+        Converts NPSData to Sense NPS API JSON format
+        '''
+        # Return the NPS data in the Sense NPS API JSON format
+        return {
+            "nps": [
+                {
+                    "id_legacy": self.form_id_legacy,
+
+                    "customer": {
+                        "id": '',
+                        "id_legacy": self.client_id_legacy
+                    },
+                    "ref_date": self.ref_date,
+                    "survey_date": self.survey_date,
+                    "medium": self.medium,
+                    "respondent": self.respondent,
+                    "score": self.score,
+                    "role": '',
+                    "stage": '',
+                    "group": self.group,
+                    "category": '',
+                    "comments": self.comments,
+                    "tags": self.tags,
+                    "form": {
+                        "id": ''
+                    }
+                }
+            ]
+        }

@@ -9,6 +9,6 @@ urlpatterns = [
     # Home page
     path('', views.index, name='index'),
 
-    # Debug page
-    path('debug/', views.debug, name='debug'),
+    # Debug NPS page
+    path('debug-nps/', views.debug_nps, name='debug-nps'),
 ]

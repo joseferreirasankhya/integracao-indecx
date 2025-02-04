@@ -9,9 +9,13 @@ from rest_framework.decorators import api_view
 from sensedata.utils.nps import NPSData
 # - JSON
 import json
+# - Services
+from sensedata.services.nps_service import NPSService
+
+# Configuring NPS Service
+nps_service = NPSService()
 
 # Views
-
 # - Index
 @api_view(['GET'])
 def index(request):
@@ -22,12 +26,22 @@ def index(request):
 
 # - Debug
 @api_view(['POST'])
-def debug(request):
+def debug_nps(request):
     '''
     Debug route for testing
     '''
-    # Transform request data to Python dictionary
+    # If request data is provided
     if request.data:
-        return Response({'message': 'Debug', 'data': request.data}, status=status.HTTP_200_OK)
+        # Transform request data to Sense NPS API JSON format
+        data = nps_service.transform_nps_data(request.data)
+        # If data is provided
+        if data:
+            # Return response with data
+            return Response({'message': 'Debug', 'data': data}, status=status.HTTP_200_OK)
+        else:
+            # Return response with error message
+            return Response({'message': 'No data provided'}, status=status.HTTP_400_BAD_REQUEST)
     else:
+        # Return response with error message
         return Response({'message': 'No data provided'}, status=status.HTTP_400_BAD_REQUEST)
+
