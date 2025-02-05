@@ -1,9 +1,15 @@
 from typing import Optional, Dict, Any
 from datetime import datetime
 import requests
+from datetime import datetime
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 class NPSService:
     '''def __init__(self, api_url: str, api_key: str):
+
         self.api_url = api_url
         self.api_key = api_key'''
 
@@ -51,8 +57,8 @@ class NPSService:
                     "id": "",
                     "id_legacy": ""
                 },
-                "ref_date": data['createdAt'],
-                "survey_date": data['inviteDate'],
+                "ref_date": datetime.strptime(data['createdAt'], '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%Y-%m-%d'),
+                "survey_date": datetime.strptime(data['inviteDate'], '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%Y-%m-%d'),
                 "medium": data['channel'],
                 "respondent": data['email'],
                 "score": int(data['review']),
@@ -71,7 +77,7 @@ class NPSService:
         Enriquece os dados com informações adicionais se necessário
         Por exemplo: adicionar timestamps, IDs únicos, etc.
         """
-        data['processed_at'] = datetime.utcnow().isoformat()
+        data['processed_at'] = datetime.now().isoformat()
         return data
 
     def _send_to_api(self, data: Dict[str, Any]) -> Dict[str, Any]:

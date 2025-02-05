@@ -24,17 +24,15 @@ def debug_nps(request):
             status=status.HTTP_400_BAD_REQUEST
         )
 
-    transformed_data = nps_service.transform_nps_data(request.data.get('answer'))
+    transformed_data = nps_service.process_nps_data(request.data.get('answer'))
     if not transformed_data:
         return Response(
             {'message': 'Invalid data format'}, 
             status=status.HTTP_400_BAD_REQUEST
         )
 
-    return Response({
-        'message': 'Debug', 
-        'data': transformed_data
-    })
+    return Response(transformed_data, status=status.HTTP_200_OK)
+
 
 @api_view(['POST'])
 def process_nps(request):
