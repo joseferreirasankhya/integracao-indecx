@@ -1,196 +1,127 @@
-# Imports
-# - Django
+from unittest.mock import patch, Mock
 from django.test import TestCase
 from django.urls import reverse
+from rest_framework import status
+from sensedata.services.nps_service import NPSService
 
-# Test Cases
-class SensedataTests(TestCase):
-    def test_index(self):
-        '''
-        Tests if the index page is responding correctly
-        '''
-        # Get response from index page
-        response = self.client.get(reverse('index'))
+MOCK_NPS_DATA = {
+    "_id": "67a21a00299e75001b700356",
+    "email": "client@email.com",
+    "feedback": "não entendi o que a Pam falou, beijos",
+    "channel": "link",
+    "companyId": "67a1fdb57b0d4d001af169bd",
+    "controlId": "IBVWKJET",
+    "metric": "nps-0-10",
+    "review": 8,
+    "createdAt": "2025-02-04T13:45:36.780Z",
+    "inviteDate": "2025-02-04T13:45:36.755Z"
+}
 
-        # Assertions
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json(), {'message': 'Hello, World!'})
+EXPECTED_TRANSFORMED_DATA = {
+    "nps": [{
+        "id_legacy": "IBVWKJET",
+        "customer": {"id": "", "id_legacy": ""},
+        "ref_date": "2025-02-04T13:45:36.780Z",
+        "survey_date": "2025-02-04T13:45:36.755Z",
+        "medium": "link",
+        "respondent": "client@email.com",
+        "score": 8,
+        "role": "",
+        "stage": "",
+        "group": "67a1fdb57b0d4d001af169bd",
+        "category": "",
+        "comments": "não entendi o que a Pam falou, beijos",
+        "tags": "",
+        "form": {"id": ""}
+    }]
+}
 
-    def test_request_without_data(self):
-        '''
-        Tests if the request without data is responding correctly
-        '''
-        response = self.client.post(reverse('debug-nps'), {})
-        self.assertEqual(response.status_code, 400)
+class NPSServiceTests(TestCase):
+    def setUp(self):
+        self.service = NPSService(
+            #api_url='http://test-api.com',
+            #api_key='test-key'
+        )
+
+    def test_validate_webhook_data_success(self):
+        """Test validation with valid data"""
+        self.assertTrue(self.service._validate_webhook_data(MOCK_NPS_DATA))
+
+    def test_validate_webhook_data_failure(self):
+        """Test validation with invalid data"""
+        invalid_data = MOCK_NPS_DATA.copy()
+        invalid_data['metric'] = 'invalid-metric'
+        self.assertFalse(self.service._validate_webhook_data(invalid_data))
+
+    def test_transform_data(self):
+        """Test data transformation"""
+        transformed = self.service._transform_data(MOCK_NPS_DATA)
+        self.assertEqual(transformed, EXPECTED_TRANSFORMED_DATA)
+
+    @patch('requests.post')
+    def test_send_to_api_success(self, mock_post):
+        """Test successful API call"""
+        mock_response = Mock()
+        mock_response.ok = True
+        mock_response.json.return_value = {"status": "success"}
+        mock_post.return_value = mock_response
+
+        response = self.service._send_to_api(EXPECTED_TRANSFORMED_DATA)
+        self.assertEqual(response, {"status": "success"})
+
+    @patch('requests.post')
+    def test_send_to_api_failure(self, mock_post):
+        """Test failed API call"""
+        mock_response = Mock()
+        mock_response.ok = False
+        mock_response.status_code = 400
+        mock_post.return_value = mock_response
+
+        with self.assertRaises(Exception):
+            self.service._send_to_api(EXPECTED_TRANSFORMED_DATA)
+
+class NPSAPITests(TestCase):
+    def test_process_nps_without_data_returns_400(self):
+        """Test API endpoint with no data"""
+        response = self.client.post(reverse('process-nps'), {})
+        
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(response.json(), {'message': 'No data provided'})
 
-    def test_transform_nps_data(self):
-        '''
-        Tests if the transform_nps_data function is working correctly
-        '''
-        # Create a mock request data
-        data = {
-            "answer": {
-                "_id": "67a21a00299e75001b700356",
-                "profileAnalysisAI": {
-                    "content": '',
-                    "date": "2025-02-04T13:45:36.784Z"
-                },
-                "active": True,
-                "reviewLogs": [],
-                "date": "2025-02-04T13:45:36.780Z",
-                "answerDate": "2025-02-04T13:45:36.780Z",
-                "inviteDate": "2025-02-04T13:45:36.755Z",
-                "typeAnswer": "",
-                "anonymousResponse": False,
-                "clientId": "",
-                "categories": [],
-                "subCategories": [],
-                "tags": "",
-                "subTags": [],
-                "subCategoriesIA": [],
-                "audioResponseUrls": [],
-                "deleted": False,
-                "partialToken": "",
-                "partialSaved": False,
-                "partialCompleted": False,  
-                "sentEmailCategoryAlert": False,
-                "alertEmailSent": False,
-                "name": "client",
-                "email": "client@email.com",
-                "phone": "5519999999999",
-                "feedback": "não entendi o que a Pam falou, beijos",
-                "media": "",
-                "additionalQuestions": [],
-                "channel": "link",
-                "companyId": "67a1fdb57b0d4d001af169bd",
-                "actionId": "67a21121299e75001b700223",
-                "inviteId": "67a21a00299e75001b700351",
-                "detailsId": "67a21a00299e75001b700350",
-                "review": 8,
-                "indicators": [],
-                "controlId": "IBVWKJET",
-                "metric": "nps-0-10",
-                "createdAt": "2025-02-04T13:45:36.780Z",
-                "surveyResponseTime": {
-                    "endDate": "2025-02-04T13:45:36.435Z",
-                    "startDate": "2025-02-04T13:44:53.848Z"
-                },
-                "autoClassification": [],
-                "updatedAt": "2025-02-04T13:45:36.885Z",
-                "sentimentAnalyzeGCP": {
-                    "score": "",
-                    "keyPhrases": ""
-                },
-                "actionName": "Teste",
-                "actionControlId": "PXGP2240",
-                "text": "Em uma escala de 0 a 10, quanto você indicaria a SANKHYA para um amigo ou familiar?"
-            }
+    @patch('sensedata.services.nps_service.NPSService.process_nps_data')
+    def test_process_nps_success(self, mock_process):
+        """Test successful API call"""
+        mock_process.return_value = {
+            "status": "success",
+            "message": "Data processed successfully",
+            "data": EXPECTED_TRANSFORMED_DATA
         }
-        # Get response from debug page
-        response = self.client.post(reverse('debug-nps'), data['answer'])
 
-        # Assert that the response is 200
-        self.assertEqual(response.status_code, 200)
+        response = self.client.post(
+            reverse('process-nps'),
+            {'answer': MOCK_NPS_DATA},
+            content_type='application/json'
+        )
+        
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            response.json()['status'],
+            'success'
+        )
 
-        # Assert that the response is the expected JSON
-        self.assertEqual(response.json(), 
-                         {'message': 'Debug', 
-                          'data': {
-                                "nps": [
-                                    {
-                                        "id_legacy": "IBVWKJET",
-                                        "customer": {
-                                            "id": "",
-                                            "id_legacy": ""
-                                        },
-                                        "ref_date": "2025-02-04T13:45:36.780Z",
-                                        "survey_date": "2025-02-04T13:45:36.755Z",
-                                        "medium": "link",
-                                        "respondent": "client@email.com",
-                                        "score": 8,
-                                        "role": "",
-                                        "stage": "",
-                                        "group": "67a1fdb57b0d4d001af169bd",
-                                        "category": "",
-                                        "comments": "não entendi o que a Pam falou, beijos",
-                                        "tags": "",
-                                        "form": {
-                                            "id": ""
-                                        }
-                                    }
-                                ]
-                            }
-                        })
+    @patch('sensedata.services.nps_service.NPSService.process_nps_data')
+    def test_process_nps_validation_error(self, mock_process):
+        """Test API call with invalid data"""
+        mock_process.side_effect = ValueError("Invalid webhook data")
 
-    def test_transform_nps_data_with_invalid_metric(self):
-        '''
-        Tests if the transform_nps_data function is working correctly with an invalid metric
-        '''
-        # Create a mock request data with an invalid metric
-        data = {
-            "answer": {
-                "_id": "67a21a00299e75001b700356",
-                "profileAnalysisAI": {
-                    "content": None,
-                    "date": "2025-02-04T13:45:36.784Z"
-                },
-                "active": True,
-                "reviewLogs": [],
-                "date": "2025-02-04T13:45:36.780Z",
-                "answerDate": "2025-02-04T13:45:36.780Z",
-                "inviteDate": "2025-02-04T13:45:36.755Z",
-                "typeAnswer": "",
-                "anonymousResponse": False,
-                "clientId": "",
-                "categories": [],
-                "subCategories": [],
-                "tags": "",
-                "subTags": [],
-                "subCategoriesIA": [],
-                "audioResponseUrls": [],
-                "deleted": False,
-                "partialToken": "",
-                "partialSaved": False,
-                "partialCompleted": False,  
-                "sentEmailCategoryAlert": False,
-                "alertEmailSent": False,
-                "name": "client",
-                "email": "client@email.com",
-                "phone": "5519999999999",
-                "feedback": "não entendi o que a Pam falou, beijos",
-                "media": "",
-                "additionalQuestions": [],
-                "channel": "link",
-                "companyId": "67a1fdb57b0d4d001af169bd",
-                "actionId": "67a21121299e75001b700223",
-                "inviteId": "67a21a00299e75001b700351",
-                "detailsId": "67a21a00299e75001b700350",
-                "review": 8,
-                "indicators": [],
-                "controlId": "IBVWKJET",
-                "metric": "invalid-metric",
-                "createdAt": "2025-02-04T13:45:36.780Z",
-                "surveyResponseTime": {
-                    "endDate": "2025-02-04T13:45:36.435Z",
-                    "startDate": "2025-02-04T13:44:53.848Z"
-                },
-                "autoClassification": [],
-                "updatedAt": "2025-02-04T13:45:36.885Z",
-                "sentimentAnalyzeGCP": {
-                    "score": "",
-                    "keyPhrases": ""
-                },
-                "actionName": "Teste",
-                "actionControlId": "PXGP2240",
-                "text": "Em uma escala de 0 a 10, quanto você indicaria a SANKHYA para um amigo ou familiar?"
-            }
-        }
-        # Get response from debug page
-        response = self.client.post(reverse('debug-nps'), data['answer'])
-
-        # Assert that the response is 400
-        self.assertEqual(response.status_code, 400)
-
-        # Assert that the response is the expected JSON
-        self.assertEqual(response.json(), {'message': 'No data provided'})
+        response = self.client.post(
+            reverse('process-nps'),
+            {'answer': {'invalid': 'data'}},
+            content_type='application/json'
+        )
+        
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(
+            response.json(),
+            {'message': 'Invalid webhook data'}
+        )
