@@ -20,9 +20,13 @@ class SensedataTests(TestCase):
         '''
         Tests if the request without data is responding correctly
         '''
+        # Get response from debug page
         response = self.client.post(reverse('debug-nps'), {})
+
+        # Assertions
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.json(), {'message': 'No data provided'})
+
 
     def test_transform_nps_data(self):
         '''
@@ -88,40 +92,42 @@ class SensedataTests(TestCase):
             }
         }
         # Get response from debug page
-        response = self.client.post(reverse('debug-nps'), data['answer'])
+        response = self.client.post(reverse('debug-nps'), data)
 
         # Assert that the response is 200
         self.assertEqual(response.status_code, 200)
 
         # Assert that the response is the expected JSON
-        self.assertEqual(response.json(), 
-                         {'message': 'Debug', 
-                          'data': {
-                                "nps": [
-                                    {
-                                        "id_legacy": "IBVWKJET",
-                                        "customer": {
-                                            "id": "",
-                                            "id_legacy": ""
-                                        },
-                                        "ref_date": "2025-02-04T13:45:36.780Z",
-                                        "survey_date": "2025-02-04T13:45:36.755Z",
-                                        "medium": "link",
-                                        "respondent": "client@email.com",
-                                        "score": 8,
-                                        "role": "",
-                                        "stage": "",
-                                        "group": "67a1fdb57b0d4d001af169bd",
-                                        "category": "",
-                                        "comments": "não entendi o que a Pam falou, beijos",
-                                        "tags": "",
-                                        "form": {
-                                            "id": ""
-                                        }
-                                    }
-                                ]
+        self.assertEqual(
+            response.json(), 
+            {
+                'message': 'Debug', 
+                'data': {
+                    "nps": [
+                        {
+                            "id_legacy": "IBVWKJET",
+                            "customer": {
+                                "id": "",
+                                "id_legacy": ""
+                            },
+                            "ref_date": "2025-02-04T13:45:36.780Z",
+                            "survey_date": "2025-02-04T13:45:36.755Z",
+                            "medium": "link",
+                            "respondent": "client@email.com",
+                            "score": 8,
+                            "role": "",
+                            "stage": "",
+                            "group": "67a1fdb57b0d4d001af169bd",
+                            "category": "",
+                            "comments": "não entendi o que a Pam falou, beijos",
+                            "tags": "",
+                            "form": {
+                                "id": ""
                             }
-                        })
+                        }
+                    ]
+                }
+            })
 
     def test_transform_nps_data_with_invalid_metric(self):
         '''
@@ -187,10 +193,10 @@ class SensedataTests(TestCase):
             }
         }
         # Get response from debug page
-        response = self.client.post(reverse('debug-nps'), data['answer'])
+        response = self.client.post(reverse('debug-nps'), data)
 
         # Assert that the response is 400
         self.assertEqual(response.status_code, 400)
 
         # Assert that the response is the expected JSON
-        self.assertEqual(response.json(), {'message': 'No data provided'})
+        self.assertEqual(response.json(), {'message': 'Wrong metric, please check the metric name'})

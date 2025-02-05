@@ -28,3 +28,14 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test
+
+# - Deploy
+deploy:
+  needs: build
+  runs-on: ubuntu-latest
+  steps:
+  - uses: actions/checkout@v4
+  - name: Set up Python ${{ matrix.python-version }}
+    uses: actions/setup-python@v3
+    with:
+      python-version: ${{ matrix.python-version }}

@@ -29,7 +29,7 @@ def debug_nps(request):
     Debug route for testing
     '''
     # If request data is provided
-    if request.data:
+    if 'answer' in request.data:
         # Transform request data to Sense NPS API JSON format
         data = nps_service.transform_nps_data(request.data['answer'])
         # If data is provided
@@ -38,7 +38,7 @@ def debug_nps(request):
             return Response({'message': 'Debug', 'data': data}, status=status.HTTP_200_OK)
         else:
             # Return response with error message
-            return Response({'message': 'No data provided'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': 'Wrong metric, please check the metric name'}, status=status.HTTP_400_BAD_REQUEST)
     else:
         # Return response with error message
         return Response({'message': 'No data provided'}, status=status.HTTP_400_BAD_REQUEST)
