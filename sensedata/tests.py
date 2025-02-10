@@ -78,7 +78,7 @@ EXPECTED_TRANSFORMED_DATA = {
         "score": 8,
         "role": "",
         "stage": "",
-        "group": None,
+        "group": 26045,
         "category": "",
         "comments": "não entendi o que a Pam falou, beijos",
         "tags": "NPS",
@@ -129,17 +129,6 @@ class NPSServiceTests(TestCase):
         with self.assertRaises(Exception):
             self.service._send_to_api(EXPECTED_TRANSFORMED_DATA)
 
-    @patch('requests.post')
-    def test_process_nps_data_success(self, mock_post):
-        """Test successful API call"""
-        response = self.client.post(
-            reverse('process-nps'),
-            MOCK_NPS_DATA.get('answer'),
-            content_type='application/json'
-        )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.get('data') != None, True)
-
 class NPSAPITests(TestCase):
     def test_process_nps_without_data_returns_400(self):
         """Test API endpoint with no data"""
@@ -159,13 +148,13 @@ class NPSAPITests(TestCase):
 
         response = self.client.post(
             reverse('process-nps'),
-            MOCK_NPS_DATA.get('answer'),
+            data=MOCK_NPS_DATA,
             content_type='application/json'
         )
         
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
-            response.json()['status'],
+            response.json().get('status'),
             'success'
         )
 

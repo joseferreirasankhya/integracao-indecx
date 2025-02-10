@@ -1,12 +1,6 @@
-from typing import Optional, Dict, Any
-from datetime import datetime
+from typing import Dict, Any
 import requests
-from datetime import datetime
-from dotenv import load_dotenv
-import os
 from utils.utils import DateUtils
-
-load_dotenv()
 
 class NPSService:
     def __init__(self, api_url: str, api_key: str):
@@ -29,9 +23,8 @@ class NPSService:
         try:
             # Pipeline de processamento
             transformed_data = self._transform_data(webhook_data)
-            # enriched_data = self._enrich_data(transformed_data)
             response = self._send_to_api(transformed_data)
-            
+
             return {
                 "status": "success",
                 "message": "Data processed successfully",
@@ -72,14 +65,6 @@ class NPSService:
                 "tags": "NPS"
             }]
         }
-
-    def _enrich_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Enriquece os dados com informações adicionais se necessário
-        Por exemplo: adicionar timestamps, IDs únicos, etc.
-        """
-        data['processed_at'] = DateUtils.convert_to_date(datetime.now().isoformat())
-        return data
 
     def _send_to_api(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Envia os dados para a API de destino"""
