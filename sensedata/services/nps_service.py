@@ -4,15 +4,16 @@ import requests
 from datetime import datetime
 from dotenv import load_dotenv
 import os
+from utils.utils import DateUtils
 
 load_dotenv()
 
 class NPSService:
-    '''def __init__(self, api_url: str, api_key: str):
-
+    def __init__(self, api_url: str, api_key: str):
         self.api_url = api_url
-        self.api_key = api_key'''
+        self.api_key = api_key
 
+    # --- Public methods ---
     def process_nps_data(self, webhook_data: Dict[str, Any]) -> Dict[str, Any]:
         """
         Processa os dados do NPS seguindo todos os passos necessários:
@@ -28,25 +29,26 @@ class NPSService:
         try:
             # Pipeline de processamento
             transformed_data = self._transform_data(webhook_data)
-            enriched_data = self._enrich_data(transformed_data)
-            #response = self._send_to_api(enriched_data)
+            # enriched_data = self._enrich_data(transformed_data)
+            response = self._send_to_api(transformed_data)
             
             return {
                 "status": "success",
                 "message": "Data processed successfully",
-                "data": enriched_data
+                "data": response
             }
             
         except Exception as e:
             raise Exception(f"Failed to process NPS data: {str(e)}")
 
+    # --- Private methods ---
     def _validate_webhook_data(self, data: Dict[str, Any]) -> bool:
         """Valida os dados recebidos do webhook"""
         required_fields = ['metric', 'review', 'email', 'controlId']
         return all(
             field in data and data[field] 
             for field in required_fields
-        ) and data['metric'] == 'nps-0-10'
+        ) and data['metric'] == 'nps-0-10' and data['active'] == True
 
     def _transform_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Transforma os dados para o formato da Sense API"""
@@ -54,21 +56,20 @@ class NPSService:
             "nps": [{
                 "id_legacy": data['controlId'],
                 "customer": {
-                    "id": "",
-                    "id_legacy": ""
+                    "id": None,
+                    "id_legacy": data['clientId']
                 },
-                "ref_date": datetime.strptime(data['createdAt'], '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%Y-%m-%d'),
-                "survey_date": datetime.strptime(data['inviteDate'], '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%Y-%m-%d'),
+                "ref_date": DateUtils.convert_to_date(data['createdAt']),
+                "survey_date": DateUtils.convert_to_date(data['inviteDate']),
                 "medium": data['channel'],
                 "respondent": data['email'],
                 "score": int(data['review']),
                 "role": "",
                 "stage": "",
-                "group": data['companyId'],
+                "group": data['clientId'],
                 "category": "",
                 "comments": data['feedback'],
-                "tags": "",
-                "form": {"id": ""}
+                "tags": "NPS"
             }]
         }
 
@@ -77,7 +78,7 @@ class NPSService:
         Enriquece os dados com informações adicionais se necessário
         Por exemplo: adicionar timestamps, IDs únicos, etc.
         """
-        data['processed_at'] = datetime.now().isoformat()
+        data['processed_at'] = DateUtils.convert_to_date(datetime.now().isoformat())
         return data
 
     def _send_to_api(self, data: Dict[str, Any]) -> Dict[str, Any]:
@@ -94,6 +95,6 @@ class NPSService:
         )
         
         if not response.ok:
-            raise Exception(f"API request failed: {response.status_code}")
+            raise Exception(f"API request failed: {response.json()}")
             
         return response.json()
