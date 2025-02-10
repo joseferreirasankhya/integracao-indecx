@@ -16,7 +16,6 @@ nps_service = NPSService(
     api_key=f"{os.getenv('SENSE_NPS_API_KEY')}="
 )
 
-
 @api_view(['GET'])
 def index(request):
     """Tests if API is responding correctly"""
@@ -56,6 +55,7 @@ def process_nps(request):
             status=status.HTTP_400_BAD_REQUEST
         )
     except Exception as e:
+        logger.error("Error processing NPS data: %s", str(e))
         return Response(
             {'message': str(e)}, 
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
