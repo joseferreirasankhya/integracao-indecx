@@ -37,7 +37,7 @@ class NPSService:
     # --- Private methods ---
     def _validate_webhook_data(self, data: Dict[str, Any]) -> bool:
         """Valida os dados recebidos do webhook"""
-        required_fields = ['metric', 'review', 'email', 'controlId']
+        required_fields = ['metric', 'review', 'controlId']
         return all(
             field in data and data[field] 
             for field in required_fields
@@ -50,16 +50,16 @@ class NPSService:
                 "id_legacy": data['controlId'],
                 "customer": {
                     "id": None,
-                    "id_legacy": data['indicators'][0]['value']
+                    "id_legacy": int(data['indicators'][0]['value'])
                 },
                 "ref_date": DateUtils.convert_to_date(data['createdAt']),
-                "survey_date": DateUtils.convert_to_date(data['inviteDate']),
+                "survey_date": DateUtils.convert_to_date(data['date']),
                 "medium": data['channel'],
                 "respondent": data['indicators'][1]['value'],
                 "score": int(data['review']),
                 "role": data['indicators'][9]['value'],
                 "stage": "",
-                "group": data['indicators'][0]['value'],
+                "group": int(data['indicators'][0]['value']),
                 "category": "",
                 "comments": data['feedback'],
                 "tags": "NPS"
