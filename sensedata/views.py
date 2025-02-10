@@ -4,10 +4,14 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from sensedata.services.nps_service import NPSService
 from django.conf import settings
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 nps_service = NPSService(
-    # api_url=settings.SENSE_API_URL,
-    # api_key=settings.SENSE_API_KEY
+    api_url=os.getenv('SENSE_NPS_API_URL'),
+    api_key=f"{os.getenv('SENSE_NPS_API_KEY')}="
 )
 
 @api_view(['GET'])
@@ -23,16 +27,7 @@ def debug_nps(request):
             {'message': 'No data provided'}, 
             status=status.HTTP_400_BAD_REQUEST
         )
-
-    transformed_data = nps_service.process_nps_data(request.data.get('answer'))
-    if not transformed_data:
-        return Response(
-            {'message': 'Invalid data format'}, 
-            status=status.HTTP_400_BAD_REQUEST
-        )
-
-    return Response(transformed_data, status=status.HTTP_200_OK)
-
+    return Response(request.data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 def process_nps(request):
