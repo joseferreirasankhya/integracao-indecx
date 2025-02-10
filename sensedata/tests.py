@@ -3,49 +3,98 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from sensedata.services.nps_service import NPSService
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 MOCK_NPS_DATA = {
+  "answer": {
     "_id": "67a21a00299e75001b700356",
+    "profileAnalysisAI": {
+      "content": None,
+      "date": "2025-02-04T13:45:36.784Z"
+    },
+    "active": True,
+    "reviewLogs": [],
+    "date": "2025-02-04T13:45:36.780Z",
+    "answerDate": "2025-02-08T13:45:36.780Z",
+    "inviteDate": "2025-02-08T13:45:36.755Z",
+    "typeAnswer": None,
+    "anonymousResponse": False,
+    "clientId": 26045,
+    "categories": [],
+    "subCategories": [],
+    "tags": [],
+    "subTags": [],
+    "subCategoriesIA": [],
+    "audioResponseUrls": [],
+    "deleted": False,
+    "partialToken": None,
+    "partialSaved": False,
+    "partialCompleted": False,
+    "sentEmailCategoryAlert": False,
+    "alertEmailSent": False,
+    "name": "client",
     "email": "client@email.com",
+    "phone": "5519999999999",
     "feedback": "não entendi o que a Pam falou, beijos",
+    "media": None,
+    "additionalQuestions": [],
     "channel": "link",
     "companyId": "67a1fdb57b0d4d001af169bd",
+    "actionId": "67a21121299e75001b700223",
+    "inviteId": "67a21a00299e75001b700351",
+    "detailsId": "67a21a00299e75001b700350",
+    "review": 8,
+    "indicators": [],
     "controlId": "IBVWKJET",
     "metric": "nps-0-10",
-    "review": 8,
-    "createdAt": "2025-02-04T13:45:36.780Z",
-    "inviteDate": "2025-02-04T13:45:36.755Z"
+    "createdAt": "2025-02-08T13:45:36.780Z",
+    "surveyResponseTime": {
+      "endDate": "2025-02-08T13:45:36.435Z",
+      "startDate": "2025-02-08T13:44:53.848Z"
+    },
+    "autoClassification": [],
+    "updatedAt": "2025-02-08T13:45:36.885Z",
+    "sentimentAnalyzeGCP": {
+      "score": None,
+      "keyPhrases": None
+    },
+    "actionName": "Teste",
+    "actionControlId": "PXGP2240",
+    "text": "Em uma escala de 0 a 10, quanto você indicaria a SANKHYA para um amigo ou familiar?"
+  }
 }
 
 EXPECTED_TRANSFORMED_DATA = {
     "nps": [{
         "id_legacy": "IBVWKJET",
-        "customer": {"id": "", "id_legacy": ""},
-        "ref_date": "2025-02-04T13:45:36.780Z",
-        "survey_date": "2025-02-04T13:45:36.755Z",
+        "customer": {"id": None, "id_legacy": 26045},
+        "ref_date": "2025-02-08",
+        "survey_date": "2025-02-08",
         "medium": "link",
         "respondent": "client@email.com",
         "score": 8,
         "role": "",
         "stage": "",
-        "group": "67a1fdb57b0d4d001af169bd",
+        "group": None,
         "category": "",
         "comments": "não entendi o que a Pam falou, beijos",
-        "tags": "",
-        "form": {"id": ""}
+        "tags": "NPS",
     }]
 }
 
 class NPSServiceTests(TestCase):
     def setUp(self):
         self.service = NPSService(
-            #api_url='http://test-api.com',
-            #api_key='test-key'
+            api_url=os.getenv('SENSE_NPS_API_URL'),
+            api_key=f"{os.getenv('SENSE_NPS_API_KEY')}="
         )
 
     def test_validate_webhook_data_success(self):
         """Test validation with valid data"""
-        self.assertTrue(self.service._validate_webhook_data(MOCK_NPS_DATA))
+        self.assertTrue(self.service._validate_webhook_data(MOCK_NPS_DATA.get('answer')))
 
     def test_validate_webhook_data_failure(self):
         """Test validation with invalid data"""
@@ -55,7 +104,7 @@ class NPSServiceTests(TestCase):
 
     def test_transform_data(self):
         """Test data transformation"""
-        transformed = self.service._transform_data(MOCK_NPS_DATA)
+        transformed = self.service._transform_data(MOCK_NPS_DATA.get('answer'))
         self.assertEqual(transformed, EXPECTED_TRANSFORMED_DATA)
 
     @patch('requests.post')
@@ -80,6 +129,17 @@ class NPSServiceTests(TestCase):
         with self.assertRaises(Exception):
             self.service._send_to_api(EXPECTED_TRANSFORMED_DATA)
 
+    @patch('requests.post')
+    def test_process_nps_data_success(self, mock_post):
+        """Test successful API call"""
+        response = self.client.post(
+            reverse('process-nps'),
+            MOCK_NPS_DATA.get('answer'),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.get('data') != None, True)
+
 class NPSAPITests(TestCase):
     def test_process_nps_without_data_returns_400(self):
         """Test API endpoint with no data"""
@@ -99,7 +159,7 @@ class NPSAPITests(TestCase):
 
         response = self.client.post(
             reverse('process-nps'),
-            {'answer': MOCK_NPS_DATA},
+            MOCK_NPS_DATA.get('answer'),
             content_type='application/json'
         )
         
