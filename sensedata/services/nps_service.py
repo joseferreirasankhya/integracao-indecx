@@ -50,16 +50,16 @@ class NPSService:
                 "id_legacy": data['controlId'],
                 "customer": {
                     "id": None,
-                    "id_legacy": data['clientId']
+                    "id_legacy": data['indicators'][0]['value']
                 },
                 "ref_date": DateUtils.convert_to_date(data['createdAt']),
                 "survey_date": DateUtils.convert_to_date(data['inviteDate']),
                 "medium": data['channel'],
-                "respondent": data['email'],
+                "respondent": data['indicators'][1]['value'],
                 "score": int(data['review']),
-                "role": "",
+                "role": data['indicators'][9]['value'],
                 "stage": "",
-                "group": data['clientId'],
+                "group": data['indicators'][0]['value'],
                 "category": "",
                 "comments": data['feedback'],
                 "tags": "NPS"
