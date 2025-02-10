@@ -46,6 +46,7 @@ def process_nps(request):
             status=status.HTTP_400_BAD_REQUEST
         )
 
+    logger.info(f"Request data: {request.data}")
     try:
         result = nps_service.process_nps_data(request.data.get('answer'))
         return Response(result)
