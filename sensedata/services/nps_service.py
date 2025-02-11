@@ -45,21 +45,23 @@ class NPSService:
 
     def _transform_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Transforma os dados para o formato da Sense API"""
+        indicators = {item['column']: item['value'] for item in data['indicators']}
+
         return {
             "nps": [{
                 "id_legacy": data['controlId'],
                 "customer": {
                     "id": None,
-                    "id_legacy": int(data['indicators'][0]['value'])
+                    "id_legacy": int(indicators.get('codigo_parceiro'))
                 },
-                "ref_date": DateUtils.convert_to_date(data['createdAt']),
-                "survey_date": DateUtils.convert_to_date(data['date']),
+                "ref_date": DateUtils.convert_to_date(data['date']),
+                "survey_date": DateUtils.convert_to_date(data['createdAt']),
                 "medium": data['channel'],
-                "respondent": data['indicators'][1]['value'],
+                "respondent": indicators.get('nome_do_contato'),
                 "score": int(data['review']),
-                "role": data['indicators'][9]['value'],
+                "role": indicators.get('cargo_do_contato'),
                 "stage": "",
-                "group": int(data['indicators'][0]['value']),
+                "group": int(indicators.get('codigo_parceiro')),
                 "category": "",
                 "comments": data['feedback'],
                 "tags": "NPS"
