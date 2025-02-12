@@ -54,14 +54,14 @@ class NPSService:
                     "id": None,
                     "id_legacy": int(indicators.get('codigo_parceiro'))
                 },
-                "ref_date": DateUtils.convert_to_date(data['date']),
-                "survey_date": DateUtils.convert_to_date(data['createdAt']),
+                "ref_date": DateUtils.convert_to_date(data['answerDate']),
+                "survey_date": DateUtils.convert_to_date(data['inviteDate']),
                 "medium": data['channel'],
                 "respondent": indicators.get('nome_contato'),
                 "score": int(data['review']),
                 "role": indicators.get('cargo_contato'),
                 "stage": "",
-                "group": int(indicators.get('codigo_parceiro')),
+                "group": "",
                 "category": "",
                 "comments": data['feedback'],
                 "tags": "NPS"

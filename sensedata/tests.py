@@ -9,122 +9,187 @@ import os
 load_dotenv()
 
 MOCK_NPS_DATA = {
-  "answers": {
-    "active": True,
-    "date": "2025-02-10T20:35:20.896Z",
-    "anonymousResponse": False,
-    "_id": "67aa6308ff525d001a6dd51d",
-    "name": "LABTECH PRODUTOS PARA LABORATORIOS E HOSPITAIS LTDA",
-    "email": "jose.ferreira@sankhya.com.br",
-    "phone": "(51)999999999",
-    "feedback": "Sankhya é top, Sankhya é agro, Sankhya é vida!!!",
-    "additionalQuestions": [],
-    "channel": "email",
-    "companyId": "67a1fdb57b0d4d001af169bd",
-    "actionId": "67aa350c6ab287002201a7e7",
-    "inviteId": "67aa62f16877e10012d3c854",
-    "detailsId": "67aa62f16877e10012d3c83f",
-    "review": 10,
-    "indicators": [
-      {
-        "_id": "67aa62f16877e10012d3c843",
-        "column": "codigo_parceiro",
-        "value": "34232",
-        "indicatorId": "67aa3fe46ab287002201a9c5",
-        "key": "34232"
+   "answer":{
+      "_id":"67ad0838ad10f500209c14c7",
+      "profileAnalysisAI":{
+         "content":"None",
+         "date":"2025-02-12T20:44:40.261Z"
       },
-      {
-        "_id": "67aa62f16877e10012d3c844",
-        "column": "nome_contato",
-        "value": "José Lucas",
-        "indicatorId": "67aa3ffe0e7d84001c2f5e7c",
-        "key": "jose_lucas"
+      "active":True,
+      "reviewLogs":[
+
+      ],
+      "date":"2025-02-12T20:44:40.255Z",
+      "answerDate":"2025-02-12T20:44:40.255Z",
+      "inviteDate":"2025-02-12T20:40:08.835Z",
+      "typeAnswer":"None",
+      "anonymousResponse":False,
+      "clientId":"None",
+      "categories":[
+
+      ],
+      "subCategories":[
+
+      ],
+      "tags":[
+
+      ],
+      "subTags":[
+
+      ],
+      "subCategoriesIA":[
+
+      ],
+      "audioResponseUrls":[
+
+      ],
+      "deleted":False,
+      "partialToken":"None",
+      "partialSaved":False,
+      "partialCompleted":False,
+      "sentEmailCategoryAlert":False,
+      "alertEmailSent":False,
+      "name":"KIFRANGO",
+      "email":"usuario@kifrango.com.br",
+      "phone":"(34) 99876-5432",
+      "feedback":"Teste Teste 2",
+      "media":"None",
+      "additionalQuestions":[
+         {
+            "_id":"67ad0838ad10f500209c14c8",
+            "type":"REVIEWS",
+            "text":" Qual o cargo que o(a) Sr.(a) ocupa atualmente na empresa? (PERGUNTAR PRIMEIRO)"
+         }
+      ],
+      "channel":"manual",
+      "companyId":"67a1fdb57b0d4d001af169bd",
+      "actionId":"67ad025fad10f500209c136d",
+      "inviteId":"67ad07286769710013700b75",
+      "detailsId":"67ad07286769710013700b32",
+      "review":9,
+      "indicators":[
+         {
+            "_id":"67ad07286769710013700b49",
+            "column":"codigo_parceiro",
+            "value":"19259",
+            "indicatorId":"67ad033aad10f500209c13d2",
+            "key":"19259"
+         },
+         {
+            "_id":"67ad07286769710013700b4a",
+            "column":"nome_contato",
+            "value":"User2",
+            "indicatorId":"67ad0347ad10f500209c13e2",
+            "key":"user2"
+         },
+         {
+            "_id":"67ad07286769710013700b4b",
+            "column":"codico_unidade",
+            "value":"34",
+            "indicatorId":"67ad0366b1d260001afb8c57",
+            "key":"34"
+         },
+         {
+            "_id":"67ad07286769710013700b4c",
+            "column":"unidade",
+            "value":"FILIAL ESPIRITO SANTO",
+            "indicatorId":"67ad0370b1d260001afb8c67",
+            "key":"filial_espirito_santo"
+         },
+         {
+            "_id":"67ad07286769710013700b4d",
+            "column":"cliente_desde",
+            "value":"09/08/2018",
+            "dateValue":"2018-08-09T00:00:00.000Z",
+            "indicatorId":"67ad0380ad10f500209c13ff",
+            "key":"43321"
+         },
+         {
+            "_id":"67ad07286769710013700b4e",
+            "column":"tempo_de_casa",
+            "value":"De 5 a 10 anos",
+            "indicatorId":"67ad038cb1d260001afb8c77",
+            "key":"de_5_a_10_anos"
+         },
+         {
+            "_id":"67ad07286769710013700b4f",
+            "column":"segmento",
+            "value":"Indústria",
+            "indicatorId":"67ad0395b1d260001afb8c8b",
+            "key":"industria"
+         },
+         {
+            "_id":"67ad07286769710013700b50",
+            "column":"faixa_de_faturamento",
+            "value":"1.000.001,00 À 4.000.000,00",
+            "indicatorId":"67ad03aaad10f500209c1417",
+            "key":"1.000.001,00_a_4.000.000,00"
+         },
+         {
+            "_id":"67ad07286769710013700b51",
+            "column":"fase",
+            "value":"Acompanhamento Evolutivo",
+            "indicatorId":"67ad03b1ad10f500209c142f",
+            "key":"acompanhamento_evolutivo"
+         },
+         {
+            "_id":"67ad07286769710013700b52",
+            "column":"status",
+            "value":"Ativo",
+            "indicatorId":"67ad03baad10f500209c1443",
+            "key":"ativo"
+         },
+         {
+            "_id":"67ad07286769710013700b53",
+            "column":"cargo_contato",
+            "value":"Desenvolvedor",
+            "indicatorId":"67ad03c4ad10f500209c1457",
+            "key":"desenvolvedor"
+         },
+         {
+            "_id":"67ad07286769710013700b54",
+            "column":"classificacao",
+            "value":"Prata",
+            "indicatorId":"67ad03d1ad10f500209c1467",
+            "key":"prata"
+         }
+      ],
+      "controlId":"MBBXLF18",
+      "metric":"nps-0-10",
+      "createdAt":"2025-02-12T20:44:40.255Z",
+      "answeredByUser":"67a1fe5e7b0d4d001af16a2c",
+      "surveyResponseTime":{
+         "endDate":"2025-02-12T20:44:39.955Z",
+         "startDate":"2025-02-12T20:44:32.787Z"
       },
-      {
-        "_id": "67aa62f16877e10012d3c845",
-        "column": "unidade",
-        "value": "FILIAL SÃO JOSÉ DOS CAMPOS",
-        "indicatorId": "67aa40116ab287002201a9f5",
-        "key": "filial_sao_jose_dos_campos"
+      "autoClassification":[
+
+      ],
+      "updatedAt":"2025-02-12T20:44:40.308Z",
+      "sentimentAnalyzeGCP":{
+         "score":"None",
+         "keyPhrases":"None"
       },
-      {
-        "_id": "67aa62f16877e10012d3c846",
-        "column": "cliente_desde",
-        "value": "01/04/2022",
-        "dateValue": "2022-04-01T00:00:00.000Z",
-        "indicatorId": "67aa40156ab287002201aa05",
-        "key": "44652"
-      },
-      {
-        "_id": "67aa62f16877e10012d3c847",
-        "column": "tempo_de_casa",
-        "value": "De 1 a 3 anos",
-        "indicatorId": "67aa401a6ab287002201aa15",
-        "key": "de_1_a_3_anos"
-      },
-      {
-        "_id": "67aa62f16877e10012d3c848",
-        "column": "segmento",
-        "value": "Serviço",
-        "indicatorId": "67aa401d6ab287002201aa25",
-        "key": "servico"
-      },
-      {
-        "_id": "67aa62f16877e10012d3c849",
-        "column": "faixa_de_faturamento",
-        "value": "1.000.001,00 À 4.000.000,00",
-        "indicatorId": "67aa402e6ab287002201aa45",
-        "key": "1.000.001,00_a_4.000.000,00"
-      },
-      {
-        "_id": "67aa62f16877e10012d3c84a",
-        "column": "fase",
-        "value": "Acompanhamento Evolutivo",
-        "indicatorId": "67aa40306ab287002201aa55",
-        "key": "acompanhamento_evolutivo"
-      },
-      {
-        "_id": "67aa62f16877e10012d3c84b",
-        "column": "status",
-        "value": "Ativo",
-        "indicatorId": "67aa40326ab287002201aa65",
-        "key": "ativo"
-      },
-      {
-        "_id": "67aa62f16877e10012d3c84c",
-        "column": "cargo_contato",
-        "value": "Diretor de TI",
-        "indicatorId": "67aa403e0e7d84001c2f5e9f",
-        "key": "diretor_de_ti"
-      },
-      {
-        "_id": "67aa62f16877e10012d3c84d",
-        "column": "classificacao",
-        "value": "Prata",
-        "indicatorId": "67aa40446ab287002201aa75",
-        "key": "prata"
-      }
-    ],
-    "controlId": "0VFBL4YQ",
-    "metric": "nps-0-10",
-    "createdAt": "2025-02-10T20:35:20.896Z"
-  }
+      "actionName":"Pesquisa PHD - SANKHYA (Réplica)",
+      "actionControlId":"O9CDXMK4",
+      "text":"Em uma escala de 0 a 10 (onde 0 Jamais indicaria e 10 Certamente indicaria), qual a chance de você indicar a SANKHYA para um amigo ou conhecido?"
+   }
 }
 
 EXPECTED_TRANSFORMED_DATA = {
     "nps": [{
-        "id_legacy": "0VFBL4YQ",
-        "customer": {"id": None, "id_legacy": 34232},
-        "ref_date": "2025-02-10",
-        "survey_date": "2025-02-10",
-        "medium": "email",
-        "respondent": "José Lucas",
-        "score": 10,
-        "role": "Diretor de TI",
+        "id_legacy": "MBBXLF18",
+        "customer": {"id": None, "id_legacy": 19259},
+        "ref_date": "2025-02-12",
+        "survey_date": "2025-02-12",
+        "medium": "manual",
+        "respondent": "User2",
+        "score": 9,
+        "role": "Desenvolvedor",
         "stage": "",
-        "group": 34232,
+        "group": "",
         "category": "",
-        "comments": "Sankhya é top, Sankhya é agro, Sankhya é vida!!!",
+        "comments": "Teste Teste 2",
         "tags": "NPS",
     }]
 }
@@ -138,7 +203,7 @@ class NPSServiceTests(TestCase):
 
     def test_validate_webhook_data_success(self):
         """Test validation with valid data"""
-        self.assertTrue(self.service._validate_webhook_data(MOCK_NPS_DATA.get('answers')))
+        self.assertTrue(self.service._validate_webhook_data(MOCK_NPS_DATA.get('answer')))
 
     def test_validate_webhook_data_failure(self):
         """Test validation with invalid data"""
@@ -148,7 +213,7 @@ class NPSServiceTests(TestCase):
 
     def test_transform_data(self):
         """Test data transformation"""
-        transformed = self.service._transform_data(MOCK_NPS_DATA.get('answers'))
+        transformed = self.service._transform_data(MOCK_NPS_DATA.get('answer'))
         self.assertEqual(transformed, EXPECTED_TRANSFORMED_DATA)
 
     @patch('requests.post')
@@ -204,7 +269,6 @@ class NPSAPITests(TestCase):
             reverse('process-nps'),
             data=MOCK_NPS_DATA,
             content_type='application/json',
-            **self.headers
         )
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -219,7 +283,6 @@ class NPSAPITests(TestCase):
             reverse('process-nps'),
             {'answer': {'invalid': 'data'}},
             content_type='application/json',
-            **self.headers
         )
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

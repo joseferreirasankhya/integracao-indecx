@@ -49,7 +49,7 @@ def process_nps(request):
 
     logger.info(f"Request data: {request.data}")
     try:
-        result = nps_service.process_nps_data(request.data)
+        result = nps_service.process_nps_data(request.data.get('answer'))
         return Response(result)
     except ValueError as e:
         return Response(
