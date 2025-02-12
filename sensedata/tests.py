@@ -174,10 +174,20 @@ class NPSServiceTests(TestCase):
             self.service._send_to_api(EXPECTED_TRANSFORMED_DATA)
 
 class NPSAPITests(TestCase):
+    def setUp(self):
+        """Setup API key for authentication"""
+        self.api_key = f"Bearer {os.getenv('API_KEY')}"
+        self.headers = {"HTTP_AUTHORIZATION": self.api_key}
+
     def test_process_nps_without_data_returns_400(self):
         """Test API endpoint with no data"""
-        response = self.client.post(reverse('process-nps'), {})
-        
+        response = self.client.post(
+            reverse('process-nps'),
+            {},
+            content_type='application/json',
+            **self.headers  # Adiciona a autenticação
+        )
+
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(response.json(), {'message': 'No data provided'})
 
@@ -193,14 +203,12 @@ class NPSAPITests(TestCase):
         response = self.client.post(
             reverse('process-nps'),
             data=MOCK_NPS_DATA,
-            content_type='application/json'
+            content_type='application/json',
+            **self.headers
         )
-        
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(
-            response.json().get('status'),
-            'success'
-        )
+        self.assertEqual(response.json().get('status'), 'success')
 
     @patch('sensedata.services.nps_service.NPSService.process_nps_data')
     def test_process_nps_validation_error(self, mock_process):
@@ -210,28 +218,21 @@ class NPSAPITests(TestCase):
         response = self.client.post(
             reverse('process-nps'),
             {'answer': {'invalid': 'data'}},
-            content_type='application/json'
+            content_type='application/json',
+            **self.headers
         )
-        
+
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(
-            response.json(),
-            {'message': 'Invalid webhook data'}
-        )
+        self.assertEqual(response.json(), {'message': 'Invalid webhook data'})
 
-    @patch('sensedata.services.nps_service.NPSService.process_nps_data')
-    def test_process_nps_validation_error(self, mock_process):
-        """Test API call with invalid data"""
-        mock_process.side_effect = ValueError("Invalid webhook data")
-
+    def test_process_nps_without_api_key_returns_403(self):
+        """Test API call without authentication"""
         response = self.client.post(
             reverse('process-nps'),
-            {'answer': {'invalid': 'data'}},
+            data=MOCK_NPS_DATA,
             content_type='application/json'
         )
-        
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(
-            response.json(),
-            {'message': 'Invalid webhook data'}
-        )
+
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.json(), {'detail': 'No API key provided.'})
+
