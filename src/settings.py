@@ -11,13 +11,13 @@ load_dotenv()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # Load environment variables
-DEBUG = os.getenv("DEBUG")
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(' ') # ['.vercel.app', 'localhost', '127.0.0.1']
+DEBUG = os.environ.get("DEBUG")
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(' ') # ['.vercel.app', 'localhost', '127.0.0.1']
 
 # Sense API Settings
-SENSE_API_URL = os.getenv('SENSE_NPS_API_URL')
-SENSE_API_KEY = f"{os.getenv('SENSE_NPS_API_KEY')}="
-API_KEY=os.getenv("API_KEY")
+SENSE_API_URL = os.environ.get('SENSE_NPS_API_URL')
+SENSE_API_KEY = f"{os.environ.get('SENSE_NPS_API_KEY')}="
+API_KEY=os.environ.get("API_KEY")
 
 if not SENSE_API_KEY and not DEBUG:
     raise ValueError(
@@ -25,7 +25,7 @@ if not SENSE_API_KEY and not DEBUG:
     )
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY", get_random_secret_key())
+SECRET_KEY = os.environ.get("SECRET_KEY", get_random_secret_key())
 
 # Application definition
 INSTALLED_APPS = [
