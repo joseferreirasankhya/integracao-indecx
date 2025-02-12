@@ -12,7 +12,11 @@ load_dotenv()
 # SECURITY WARNING: don't run with debug turned on in production!
 # Load environment variables
 DEBUG = os.environ.get("DEBUG")
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", []).split(',') # ['.vercel.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [
+    '.vercel.app',
+    'localhost',
+    '127.0.0.1'
+]
 
 # Sense API Settings
 SENSE_API_URL = os.environ.get('SENSE_NPS_API_URL')
