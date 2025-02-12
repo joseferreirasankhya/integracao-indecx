@@ -55,12 +55,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'src.urls'
 
-REST_FRAMEWORK = {
+'''REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'sensedata.authentication.APIKeyAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [],
-}
+}'''
 
 TEMPLATES = [
     {

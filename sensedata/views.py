@@ -18,13 +18,11 @@ nps_service = NPSService(
 
 # URLs
 @api_view(['GET'])
-@authentication_classes([APIKeyAuthentication])
 def index(request):
     """Tests if API is responding correctly"""
     return Response({'message': 'Hello, World!'})
 
 @api_view(['POST'])
-@authentication_classes([APIKeyAuthentication])
 def debug_nps(request):
     """Debug endpoint for NPS data transformation"""
 
@@ -41,7 +39,6 @@ def debug_nps(request):
     return Response(request.data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
-@authentication_classes([APIKeyAuthentication])
 def process_nps(request):
     """Endpoint para processar dados do NPS"""
     if not request.data:
