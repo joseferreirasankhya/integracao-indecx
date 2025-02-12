@@ -1,21 +1,21 @@
-
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv()
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
-
 # Load environment variables
-import os
-from pathlib import Path
+DEBUG = os.getenv("DEBUG")
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(' ') # ['.vercel.app', 'localhost', '127.0.0.1']
 
 # Sense API Settings
-SENSE_API_URL = os.getenv('SENSE_API_URL', 'https://api.sense.com/v1')  # default URL como exemplo
-SENSE_API_KEY = os.getenv('SENSE_API_KEY')
+SENSE_API_URL = os.getenv('SENSE_NPS_API_URL')
+SENSE_API_KEY = f"{os.getenv('SENSE_NPS_API_KEY')}="
+API_KEY=os.getenv("API_KEY")
 
 if not SENSE_API_KEY and not DEBUG:
     raise ValueError(
@@ -23,8 +23,7 @@ if not SENSE_API_KEY and not DEBUG:
     )
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-tx$8enb3p9xxd8o7aw=h^a%m-!v+r=w2772l@5qqmeh$aaek-q'
-
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # Application definition
 INSTALLED_APPS = [
@@ -49,6 +48,13 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'src.urls'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'sensedata.authentication.APIKeyAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [],
+}
 
 TEMPLATES = [
     {
