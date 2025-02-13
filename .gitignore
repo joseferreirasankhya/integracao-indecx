@@ -10,6 +10,7 @@ db.sqlite3
 # Cache
 __pycache__
 sensedata/__pycache__
+sensedata/migrations/
 
 # Static files
 src/staticfiles
