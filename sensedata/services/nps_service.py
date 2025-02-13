@@ -37,11 +37,12 @@ class NPSService:
     # --- Private methods ---
     def _validate_webhook_data(self, data: Dict[str, Any]) -> bool:
         """Valida os dados recebidos do webhook"""
-        required_fields = ['metric', 'review', 'controlId']
-        return all(
-            field in data and data[field] 
-            for field in required_fields
-        ) and data['metric'] == 'nps-0-10' and data['active'] == True
+        required_fields = ['metric', 'review', 'controlId', 'active']
+        return (
+            all(field in data for field in required_fields) and
+            data['metric'] == 'nps-0-10' and
+            data['active'] is True
+        )
 
     def _transform_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Transforma os dados para o formato da Sense API"""
@@ -54,12 +55,12 @@ class NPSService:
                     "id": None,
                     "id_legacy": int(indicators.get('codigo_parceiro'))
                 },
-                "ref_date": DateUtils.convert_to_date(data['answerDate']),
-                "survey_date": DateUtils.convert_to_date(data['inviteDate']),
+                "ref_date": DateUtils.convert_to_date(data['date']),
+                "survey_date": DateUtils.convert_to_date(data['date']),
                 "medium": data['channel'],
                 "respondent": indicators.get('nome_contato'),
                 "score": int(data['review']),
-                "role": indicators.get('cargo_contato'),
+                "role": data['additionalQuestions'][0]['multipleValues'][0],
                 "stage": "",
                 "group": "",
                 "category": "",

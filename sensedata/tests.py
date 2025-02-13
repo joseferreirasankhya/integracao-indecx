@@ -9,189 +9,155 @@ import os
 load_dotenv()
 
 MOCK_NPS_DATA = {
-   "answer":{
-      "_id":"67ad0838ad10f500209c14c7",
-      "profileAnalysisAI":{
-         "content":"None",
-         "date":"2025-02-12T20:44:40.261Z"
-      },
-      "active":True,
-      "reviewLogs":[
-
-      ],
-      "date":"2025-02-12T20:44:40.255Z",
-      "answerDate":"2025-02-12T20:44:40.255Z",
-      "inviteDate":"2025-02-12T20:40:08.835Z",
-      "typeAnswer":"None",
-      "anonymousResponse":False,
-      "clientId":"None",
-      "categories":[
-
-      ],
-      "subCategories":[
-
-      ],
-      "tags":[
-
-      ],
-      "subTags":[
-
-      ],
-      "subCategoriesIA":[
-
-      ],
-      "audioResponseUrls":[
-
-      ],
-      "deleted":False,
-      "partialToken":"None",
-      "partialSaved":False,
-      "partialCompleted":False,
-      "sentEmailCategoryAlert":False,
-      "alertEmailSent":False,
-      "name":"KIFRANGO",
-      "email":"usuario@kifrango.com.br",
-      "phone":"(34) 99876-5432",
-      "feedback":"Teste Teste 2",
-      "media":"None",
+   "answers": {
+      "active": True,
+      "date":"2025-02-13T13:01:26.793Z",
+      "anonymousResponse": False,
+      "_id":"67aded263feb060032e06e27",
+      "name":"EMPRESA XYZ",
+      "email":"cliente@empresa.com",
+      "phone":"5500000000000",
+      "feedback":"O serviço precisa de melhorias, especialmente no suporte. O atendimento tem demoras e poderia ser mais eficiente.",
       "additionalQuestions":[
          {
-            "_id":"67ad0838ad10f500209c14c8",
-            "type":"REVIEWS",
-            "text":" Qual o cargo que o(a) Sr.(a) ocupa atualmente na empresa? (PERGUNTAR PRIMEIRO)"
+            "conditionalQuestion":[],
+            "multipleValues":[
+               "Outros: Gerente"
+            ],
+            "options":[],
+            "indicatorValueEnabled": False,
+            "selectedIndicator":"None",
+            "indicatorValue":"None",
+            "indicatorCriterion":"None",
+            "questionId":"67851f1db726a6002b1153de",
+            "anonymousResponse": False,
+            "_id":"67aded263feb060032e06e28",
+            "text":" Qual o cargo que o(a) Sr.(a) ocupa atualmente na empresa? (PERGUNTAR PRIMEIRO)",
+            "type":"MULTIPLE",
+            "multipleType":"radio"
          }
       ],
       "channel":"manual",
-      "companyId":"67a1fdb57b0d4d001af169bd",
-      "actionId":"67ad025fad10f500209c136d",
-      "inviteId":"67ad07286769710013700b75",
-      "detailsId":"67ad07286769710013700b32",
-      "review":9,
+      "companyId":"000000000000000000000000",
+      "actionId":"000000000000000000000000",
+      "inviteId":"000000000000000000000000",
+      "detailsId":"000000000000000000000000",
+      "review":0,
       "indicators":[
          {
-            "_id":"67ad07286769710013700b49",
+            "_id":"000000000000000000000000",
             "column":"codigo_parceiro",
-            "value":"19259",
-            "indicatorId":"67ad033aad10f500209c13d2",
-            "key":"19259"
+            "value":"99999",
+            "indicatorId":"000000000000000000000000",
+            "key":"99999"
          },
          {
-            "_id":"67ad07286769710013700b4a",
+            "_id":"000000000000000000000000",
             "column":"nome_contato",
-            "value":"User2",
-            "indicatorId":"67ad0347ad10f500209c13e2",
-            "key":"user2"
+            "value":"JOÃO SILVA",
+            "indicatorId":"000000000000000000000000",
+            "key":"joao_silva"
          },
          {
-            "_id":"67ad07286769710013700b4b",
+            "_id":"000000000000000000000000",
             "column":"codico_unidade",
-            "value":"34",
-            "indicatorId":"67ad0366b1d260001afb8c57",
-            "key":"34"
+            "value":"000",
+            "indicatorId":"000000000000000000000000",
+            "key":"000"
          },
          {
-            "_id":"67ad07286769710013700b4c",
+            "_id":"000000000000000000000000",
             "column":"unidade",
-            "value":"FILIAL ESPIRITO SANTO",
-            "indicatorId":"67ad0370b1d260001afb8c67",
-            "key":"filial_espirito_santo"
+            "value":"FILIAL SUL",
+            "indicatorId":"000000000000000000000000",
+            "key":"filial_sul"
          },
          {
-            "_id":"67ad07286769710013700b4d",
+            "_id":"000000000000000000000000",
             "column":"cliente_desde",
-            "value":"09/08/2018",
-            "dateValue":"2018-08-09T00:00:00.000Z",
-            "indicatorId":"67ad0380ad10f500209c13ff",
-            "key":"43321"
+            "value":"01/01/2020",
+            "dateValue":"2020-01-01T00:00:00.000Z",
+            "indicatorId":"000000000000000000000000",
+            "key":"00000"
          },
          {
-            "_id":"67ad07286769710013700b4e",
+            "_id":"000000000000000000000000",
             "column":"tempo_de_casa",
-            "value":"De 5 a 10 anos",
-            "indicatorId":"67ad038cb1d260001afb8c77",
-            "key":"de_5_a_10_anos"
+            "value":"De 1 a 3 anos",
+            "indicatorId":"000000000000000000000000",
+            "key":"de_1_a_3_anos"
          },
          {
-            "_id":"67ad07286769710013700b4f",
+            "_id":"000000000000000000000000",
             "column":"segmento",
-            "value":"Indústria",
-            "indicatorId":"67ad0395b1d260001afb8c8b",
-            "key":"industria"
+            "value":"Varejo",
+            "indicatorId":"000000000000000000000000",
+            "key":"varejo"
          },
          {
-            "_id":"67ad07286769710013700b50",
+            "_id":"000000000000000000000000",
+            "column":"perfil",
+            "value":"BÁSICO",
+            "indicatorId":"000000000000000000000000",
+            "key":"basico"
+         },
+         {
+            "_id":"000000000000000000000000",
             "column":"faixa_de_faturamento",
-            "value":"1.000.001,00 À 4.000.000,00",
-            "indicatorId":"67ad03aaad10f500209c1417",
-            "key":"1.000.001,00_a_4.000.000,00"
+            "value":"100.000,00 À 200.000,00",
+            "indicatorId":"000000000000000000000000",
+            "key":"100.000,00_a_200.000,00"
          },
          {
-            "_id":"67ad07286769710013700b51",
+            "_id":"000000000000000000000000",
             "column":"fase",
-            "value":"Acompanhamento Evolutivo",
-            "indicatorId":"67ad03b1ad10f500209c142f",
-            "key":"acompanhamento_evolutivo"
+            "value":"Em Desenvolvimento",
+            "indicatorId":"000000000000000000000000",
+            "key":"em_desenvolvimento"
          },
          {
-            "_id":"67ad07286769710013700b52",
+            "_id":"000000000000000000000000",
             "column":"status",
             "value":"Ativo",
-            "indicatorId":"67ad03baad10f500209c1443",
+            "indicatorId":"000000000000000000000000",
             "key":"ativo"
          },
          {
-            "_id":"67ad07286769710013700b53",
-            "column":"cargo_contato",
-            "value":"Desenvolvedor",
-            "indicatorId":"67ad03c4ad10f500209c1457",
-            "key":"desenvolvedor"
-         },
-         {
-            "_id":"67ad07286769710013700b54",
+            "_id":"000000000000000000000000",
             "column":"classificacao",
             "value":"Prata",
-            "indicatorId":"67ad03d1ad10f500209c1467",
+            "indicatorId":"000000000000000000000000",
             "key":"prata"
          }
       ],
-      "controlId":"MBBXLF18",
+      "controlId":"XXXXXXXX",
       "metric":"nps-0-10",
-      "createdAt":"2025-02-12T20:44:40.255Z",
-      "answeredByUser":"67a1fe5e7b0d4d001af16a2c",
-      "surveyResponseTime":{
-         "endDate":"2025-02-12T20:44:39.955Z",
-         "startDate":"2025-02-12T20:44:32.787Z"
-      },
-      "autoClassification":[
-
-      ],
-      "updatedAt":"2025-02-12T20:44:40.308Z",
-      "sentimentAnalyzeGCP":{
-         "score":"None",
-         "keyPhrases":"None"
-      },
-      "actionName":"Pesquisa PHD - SANKHYA (Réplica)",
-      "actionControlId":"O9CDXMK4",
-      "text":"Em uma escala de 0 a 10 (onde 0 Jamais indicaria e 10 Certamente indicaria), qual a chance de você indicar a SANKHYA para um amigo ou conhecido?"
+      "createdAt":"2025-02-13T13:01:26.793Z"
    }
 }
 
+
 EXPECTED_TRANSFORMED_DATA = {
-    "nps": [{
-        "id_legacy": "MBBXLF18",
-        "customer": {"id": None, "id_legacy": 19259},
-        "ref_date": "2025-02-12",
-        "survey_date": "2025-02-12",
-        "medium": "manual",
-        "respondent": "User2",
-        "score": 9,
-        "role": "Desenvolvedor",
-        "stage": "",
-        "group": "",
-        "category": "",
-        "comments": "Teste Teste 2",
-        "tags": "NPS",
-    }]
+    "nps": [
+        {
+            "id_legacy": "XXXXXXXX",
+            "customer": {
+                "id": None,
+                "id_legacy": 99999
+            },
+            "ref_date": "2025-02-13",
+            "survey_date": "2025-02-13",
+            "medium": "manual",
+            "respondent": "JOÃO SILVA",
+            "score": 0,
+            "role": "Outros: Gerente",
+            "stage": "",
+            "group": "",
+            "category": "",
+            "comments": "O serviço precisa de melhorias, especialmente no suporte. O atendimento tem demoras e poderia ser mais eficiente.",
+            "tags": "NPS"
+        }
+    ]
 }
 
 class NPSServiceTests(TestCase):
@@ -203,7 +169,7 @@ class NPSServiceTests(TestCase):
 
     def test_validate_webhook_data_success(self):
         """Test validation with valid data"""
-        self.assertTrue(self.service._validate_webhook_data(MOCK_NPS_DATA.get('answer')))
+        self.assertTrue(self.service._validate_webhook_data(MOCK_NPS_DATA.get('answers')))
 
     def test_validate_webhook_data_failure(self):
         """Test validation with invalid data"""
@@ -213,7 +179,7 @@ class NPSServiceTests(TestCase):
 
     def test_transform_data(self):
         """Test data transformation"""
-        transformed = self.service._transform_data(MOCK_NPS_DATA.get('answer'))
+        transformed = self.service._transform_data(MOCK_NPS_DATA.get('answers'))
         self.assertEqual(transformed, EXPECTED_TRANSFORMED_DATA)
 
     @patch('requests.post')
@@ -281,7 +247,7 @@ class NPSAPITests(TestCase):
 
         response = self.client.post(
             reverse('process-nps'),
-            {'answer': {'invalid': 'data'}},
+            {'answers': {'invalid': 'data'}},
             content_type='application/json',
         )
 
