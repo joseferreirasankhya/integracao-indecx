@@ -55,6 +55,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'src.urls'
 
+# Desativado temporariamente
 '''REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'sensedata.authentication.APIKeyAuthentication',

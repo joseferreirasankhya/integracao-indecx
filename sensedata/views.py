@@ -38,6 +38,7 @@ def debug_nps(request):
 
     return Response(request.data, status=status.HTTP_200_OK)
 
+
 @api_view(['POST'])
 def process_nps(request):
     """Endpoint para processar dados do NPS"""
@@ -49,7 +50,16 @@ def process_nps(request):
 
     logger.info(f"Request data: {request.data}")
     try:
-        result = nps_service.process_nps_data(request.data.get('answers'))
+        answer_data = request.data.get('answers') or request.data.get('answer')
+
+        # Garante que o dado é um dicionário válido
+        if not answer_data:
+            return Response(
+                {'message': 'Invalid data format'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        result = nps_service.process_nps_data(answer_data)
         return Response(result)
     except ValueError as e:
         return Response(
@@ -62,3 +72,4 @@ def process_nps(request):
             {'message': str(e)},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+

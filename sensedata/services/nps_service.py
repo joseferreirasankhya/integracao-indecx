@@ -30,7 +30,7 @@ class NPSService:
                 "message": "Data processed successfully",
                 "data": response
             }
-            
+
         except Exception as e:
             raise Exception(f"Failed to process NPS data: {str(e)}")
 
@@ -60,7 +60,8 @@ class NPSService:
                 "medium": data['channel'],
                 "respondent": indicators.get('nome_contato'),
                 "score": int(data['review']),
-                "role": data['additionalQuestions'][0]['multipleValues'][0],
+                "role": indicators.get('cargo_contato') if 'cargo_contato' in indicators.keys() else
+                        str(data['additionalQuestions'][0]['multipleValues'][0]).split(':')[1].lstrip(),
                 "stage": "",
                 "group": "",
                 "category": "",
