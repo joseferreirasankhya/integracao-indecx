@@ -1,0 +1,22 @@
+{
+    "nps": [
+        {
+            "id_legacy": "XXXXXXXX",
+            "customer": {
+                "id": null,
+                "id_legacy": 99999
+            },
+            "ref_date": "2025-02-13",
+            "survey_date": "2025-02-13",
+            "medium": "manual",
+            "respondent": "JOÃO SILVA",
+            "score": 0,
+            "role": "Gerente",
+            "stage": "",
+            "group": "",
+            "category": "",
+            "comments": "O serviço precisa de melhorias, especialmente no suporte. O atendimento tem demoras e poderia ser mais eficiente.",
+            "tags": "NPS"
+        }
+    ]
+}

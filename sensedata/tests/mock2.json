@@ -1,0 +1,183 @@
+{
+   "answer":{
+      "_id":"67b32216691694002e2bd9a9",
+      "profileAnalysisAI":{
+         "content":"None",
+         "date":"2025-02-17T11:48:38.778Z"
+      },
+      "active":true,
+      "reviewLogs":[
+
+      ],
+      "date":"2025-02-17T11:48:38.773Z",
+      "answerDate":"2025-02-17T11:48:38.773Z",
+      "inviteDate":"2025-02-06T19:54:16.435Z",
+      "typeAnswer":"None",
+      "anonymousResponse":false,
+      "clientId":"None",
+      "categories":[
+
+      ],
+      "subCategories":[
+
+      ],
+      "tags":[
+
+      ],
+      "subTags":[
+
+      ],
+      "subCategoriesIA":[
+
+      ],
+      "audioResponseUrls":[
+
+      ],
+      "deleted":false,
+      "partialToken":"None",
+      "partialSaved":false,
+      "partialCompleted":false,
+      "sentEmailCategoryAlert":false,
+      "alertEmailSent":false,
+      "name":"SINKO ENGENHARIA",
+      "email":"adriano@macrodistribuidor.com.br",
+      "phone":"5562982358222",
+      "feedback":"Pontos fracos que incluem a disponibilidade dos consultores e service desk, não funciona!",
+      "media":"None",
+      "additionalQuestions":[
+         {
+            "_id":"67b32216691694002e2bd9aa",
+            "type":"MULTIPLE",
+            "text":" Qual o cargo que o(a) Sr.(a) ocupa atualmente na empresa? (PERGUNTAR PRIMEIRO)",
+            "multipleValues":[
+               "Outros: Sócio "
+            ]
+         }
+      ],
+      "channel":"manual",
+      "companyId":"6671e5a3ef5b5d001be3af8c",
+      "actionId":"67865d09b269e100200106bb",
+      "inviteId":"67a5136796cd0e001330fc89",
+      "detailsId":"67a5136354ac0b0013a846ad",
+      "review":6,
+      "indicators":[
+         {
+            "_id":"67a5136454ac0b0013a86b0b",
+            "column":"codigo_parceiro",
+            "value":"31312",
+            "indicatorId":"67865d09b269e100200106c2",
+            "key":"31312"
+         },
+         {
+            "_id":"67a5136454ac0b0013a86b0c",
+            "column":"nome_contato",
+            "value":"Adriano Borges de Carvalho",
+            "indicatorId":"67865d09b269e100200106ce",
+            "key":"adriano_borges_de_carvalho"
+         },
+         {
+            "_id":"67a5136454ac0b0013a86b0d",
+            "column":"codico_unidade",
+            "value":"150",
+            "indicatorId":"67865d09b269e100200106c3",
+            "key":"150"
+         },
+         {
+            "_id":"67a5136454ac0b0013a86b0e",
+            "column":"unidade",
+            "value":"FILIAL BRASIL CENTRAL",
+            "indicatorId":"67865d09b269e100200106c4",
+            "key":"filial_brasil_central"
+         },
+         {
+            "_id":"67a5136454ac0b0013a86b0f",
+            "column":"cliente_desde",
+            "value":"05/03/2021",
+            "dateValue":"2021-03-05T00:00:00.000Z",
+            "indicatorId":"67865d09b269e100200106c5",
+            "key":"44260"
+         },
+         {
+            "_id":"67a5136454ac0b0013a86b10",
+            "column":"tempo_de_casa",
+            "value":"De 3 a 5 anos",
+            "indicatorId":"67865d09b269e100200106c6",
+            "key":"de_3_a_5_anos"
+         },
+         {
+            "_id":"67a5136454ac0b0013a86b11",
+            "column":"segmento",
+            "value":"Serviço",
+            "indicatorId":"67865d09b269e100200106c7",
+            "key":"servico"
+         },
+         {
+            "_id":"67a5136454ac0b0013a86b12",
+            "column":"perfil",
+            "value":"FULL",
+            "indicatorId":"67865d09b269e100200106c8",
+            "key":"full"
+         },
+         {
+            "_id":"67a5136454ac0b0013a86b13",
+            "column":"faixa_de_faturamento",
+            "value":"12.500.001,00 À 25.000.000,00",
+            "indicatorId":"67865d09b269e100200106c9",
+            "key":"12.500.001,00_a_25.000.000,00"
+         },
+         {
+            "_id":"67a5136454ac0b0013a86b14",
+            "column":"fase",
+            "value":"Acompanhamento Evolutivo",
+            "indicatorId":"67865d09b269e100200106ca",
+            "key":"acompanhamento_evolutivo"
+         },
+         {
+            "_id":"67a5136454ac0b0013a86b15",
+            "column":"status",
+            "value":"Ativo",
+            "indicatorId":"67865d09b269e100200106cb",
+            "key":"ativo"
+         },
+         {
+            "_id":"67a5136454ac0b0013a86b16",
+            "column":"cargo_contato",
+            "value":"Sócio",
+            "indicatorId":"67865d09b269e100200106cc",
+            "key":"socio"
+         },
+         {
+            "_id":"67a5136454ac0b0013a86b17",
+            "column":"classificacao",
+            "value":"Prata",
+            "indicatorId":"67865d09b269e100200106cd",
+            "key":"prata"
+         }
+      ],
+      "controlId":"DI1U40KV",
+      "metric":"nps-0-10",
+      "createdAt":"2025-02-17T11:48:38.773Z",
+      "answeredByUser":"66292bf41e691d002df583bd",
+      "surveyResponseTime":{
+         "endDate":"2025-02-17T11:48:38.497Z",
+         "startDate":"2025-02-17T11:44:02.900Z"
+      },
+      "autoClassification":[
+
+      ],
+      "updatedAt":"2025-02-17T11:48:39.398Z",
+      "sentimentAnalyzeGCP":{
+         "score":-0.6219124794006348,
+         "keyPhrases":[
+            "Pontos",
+            "fracos",
+            "disponibilidade",
+            "consultores",
+            "service"
+         ]
+      },
+      "actionName":"Pesquisas PHD - SANKHYA",
+      "actionControlId":"R215ZW3W",
+      "text":"Em uma escala de 0 a 10 (onde 0 Jamais indicaria e 10 Certamente indicaria), qual a chance de você indicar a SANKHYA para um amigo ou conhecido?"
+   }
+}
