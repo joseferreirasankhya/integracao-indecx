@@ -55,8 +55,10 @@ class NPSService:
                     "id": None,
                     "id_legacy": int(indicators.get('codigo_parceiro'))
                 },
-                "ref_date": DateUtils.convert_to_date(data['date']),
-                "survey_date": DateUtils.convert_to_date(data['date']),
+                "ref_date": DateUtils.convert_to_date(data['answerDate']) if 'answerDate' in data.keys() else
+                               DateUtils.convert_to_date(data['date']),
+                "survey_date": DateUtils.convert_to_date(data['inviteDate']) if 'inviteDate' in data.keys() else
+                               DateUtils.convert_to_date(data['date']),
                 "medium": data['channel'],
                 "respondent": indicators.get('nome_contato'),
                 "score": int(data['review']),
