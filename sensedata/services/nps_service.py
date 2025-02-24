@@ -78,12 +78,17 @@ class NPSService:
             'Authorization': f'Bearer {self.api_key}',
             'Content-Type': 'application/json'
         }
-        
-        response = requests.post(
-            f"{self.api_url}/nps",
-            json=data,
-            headers=headers
-        )
+
+        try:
+            response = requests.post(
+                f"{self.api_url}/nps",
+                json=data,
+                headers=headers,
+                timeout=10
+            )
+            response.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            raise Exception(f"Failed to send data to API: {str(e)}")
         
         if not response.ok:
             raise Exception(f"API request failed: {response.json()}")

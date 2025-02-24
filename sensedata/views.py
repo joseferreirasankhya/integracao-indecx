@@ -26,9 +26,6 @@ def index(request):
 def debug_nps(request):
     """Debug endpoint for NPS data transformation"""
 
-    # Logando o request data
-    logger.info("Request data received: %s", request.data)
-
     if not request.data:
         logger.warning("No data provided in the request.")
         return Response(
@@ -48,7 +45,6 @@ def process_nps(request):
             status=status.HTTP_400_BAD_REQUEST
         )
 
-    logger.info(f"Request data: {request.data}")
     try:
         answer_data = request.data.get('answers') or request.data.get('answer')
 
@@ -72,4 +68,3 @@ def process_nps(request):
             {'message': str(e)},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
-
