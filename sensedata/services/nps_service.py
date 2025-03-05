@@ -28,7 +28,6 @@ class NPSService:
             return {
                 "status": "success",
                 "message": "Data processed successfully",
-                "data": response
             }
 
         except Exception as e:
