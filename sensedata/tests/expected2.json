@@ -1,0 +1,22 @@
+{
+    "nps": [
+        {
+            "id_legacy": "DI1U40KV",
+            "customer": {
+                "id": null,
+                "id_legacy": 31312
+            },
+            "ref_date": "2025-02-17",
+            "survey_date": "2025-02-06",
+            "medium": "manual",
+            "respondent": "Adriano Borges de Carvalho",
+            "score": 6,
+            "role": "Sócio",
+            "stage": "",
+            "group": "",
+            "category": "",
+            "comments": "Pontos fracos que incluem a disponibilidade dos consultores e service desk, não funciona!",
+            "tags": "NPS"
+        }
+    ]
+}

@@ -1,0 +1,127 @@
+{
+   "answers": {
+      "active": true,
+      "date":"2025-02-13T13:01:26.793Z",
+      "anonymousResponse": false,
+      "_id":"67aded263feb060032e06e27",
+      "name":"EMPRESA XYZ",
+      "email":"cliente@empresa.com",
+      "phone":"5500000000000",
+      "feedback":"O serviço precisa de melhorias, especialmente no suporte. O atendimento tem demoras e poderia ser mais eficiente.",
+      "additionalQuestions":[
+         {
+            "conditionalQuestion":[],
+            "multipleValues":[
+               "Outros: Gerente"
+            ],
+            "options":[],
+            "indicatorValueEnabled": false,
+            "selectedIndicator":"None",
+            "indicatorValue":"None",
+            "indicatorCriterion":"None",
+            "questionId":"67851f1db726a6002b1153de",
+            "anonymousResponse": false,
+            "_id":"67aded263feb060032e06e28",
+            "text":" Qual o cargo que o(a) Sr.(a) ocupa atualmente na empresa? (PERGUNTAR PRIMEIRO)",
+            "type":"MULTIPLE",
+            "multipleType":"radio"
+         }
+      ],
+      "channel":"manual",
+      "companyId":"000000000000000000000000",
+      "actionId":"000000000000000000000000",
+      "inviteId":"000000000000000000000000",
+      "detailsId":"000000000000000000000000",
+      "review":0,
+      "indicators":[
+         {
+            "_id":"000000000000000000000000",
+            "column":"codigo_parceiro",
+            "value":"99999",
+            "indicatorId":"000000000000000000000000",
+            "key":"99999"
+         },
+         {
+            "_id":"000000000000000000000000",
+            "column":"nome_contato",
+            "value":"JOÃO SILVA",
+            "indicatorId":"000000000000000000000000",
+            "key":"joao_silva"
+         },
+         {
+            "_id":"000000000000000000000000",
+            "column":"codico_unidade",
+            "value":"000",
+            "indicatorId":"000000000000000000000000",
+            "key":"000"
+         },
+         {
+            "_id":"000000000000000000000000",
+            "column":"unidade",
+            "value":"FILIAL SUL",
+            "indicatorId":"000000000000000000000000",
+            "key":"filial_sul"
+         },
+         {
+            "_id":"000000000000000000000000",
+            "column":"cliente_desde",
+            "value":"01/01/2020",
+            "dateValue":"2020-01-01T00:00:00.000Z",
+            "indicatorId":"000000000000000000000000",
+            "key":"00000"
+         },
+         {
+            "_id":"000000000000000000000000",
+            "column":"tempo_de_casa",
+            "value":"De 1 a 3 anos",
+            "indicatorId":"000000000000000000000000",
+            "key":"de_1_a_3_anos"
+         },
+         {
+            "_id":"000000000000000000000000",
+            "column":"segmento",
+            "value":"Varejo",
+            "indicatorId":"000000000000000000000000",
+            "key":"varejo"
+         },
+         {
+            "_id":"000000000000000000000000",
+            "column":"perfil",
+            "value":"BÁSICO",
+            "indicatorId":"000000000000000000000000",
+            "key":"basico"
+         },
+         {
+            "_id":"000000000000000000000000",
+            "column":"faixa_de_faturamento",
+            "value":"100.000,00 À 200.000,00",
+            "indicatorId":"000000000000000000000000",
+            "key":"100.000,00_a_200.000,00"
+         },
+         {
+            "_id":"000000000000000000000000",
+            "column":"fase",
+            "value":"Em Desenvolvimento",
+            "indicatorId":"000000000000000000000000",
+            "key":"em_desenvolvimento"
+         },
+         {
+            "_id":"000000000000000000000000",
+            "column":"status",
+            "value":"Ativo",
+            "indicatorId":"000000000000000000000000",
+            "key":"ativo"
+         },
+         {
+            "_id":"000000000000000000000000",
+            "column":"classificacao",
+            "value":"Prata",
+            "indicatorId":"000000000000000000000000",
+            "key":"prata"
+         }
+      ],
+      "controlId":"XXXXXXXX",
+      "metric":"nps-0-10",
+      "createdAt":"2025-02-13T13:01:26.793Z"
+   }
+}
