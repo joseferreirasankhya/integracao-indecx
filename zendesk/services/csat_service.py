@@ -1,6 +1,11 @@
+from zendesk.mongo.mongo_client import MongoClientInterface
+
 class CSATService:
     def __init__(self):
-        pass
+        self.mongo_client = MongoClientInterface()
 
-    def receive_data(self, request):
-        pass
+    def save_data(self, request):
+        return self.mongo_client.save_document(request.data)
+
+    def test(self):
+        return self.mongo_client.test()
