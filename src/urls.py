@@ -4,4 +4,5 @@ from django.contrib import admin
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/sensedata/', include('sensedata.urls')),  # Ensure trailing slash
+    path('api/v1/zendesk/', include('zendesk.urls'))
 ]
